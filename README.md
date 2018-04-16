@@ -5,6 +5,8 @@ ansible_role-jenkins_docker_base
 
 This role will install the minimal dependencies for customer containers used with the [kubernetes plugin](https://github.com/jenkinsci/kubernetes-plugin) for jenkins slaves.
 
+*Note* - when building Docker image, be sure to set `USER: jenkins` to set runtime user.
+
 Requirements
 ------------
 
