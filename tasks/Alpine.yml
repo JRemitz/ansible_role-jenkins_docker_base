@@ -1,0 +1,8 @@
+---
+- name: add jenkins_group for Alpine
+  command: addgroup -g {{ item.gid }} {{ item.name }}
+  with_items:
+    - { name: "{{ jenkins_group }}", gid: "{{ jenkins_gid }}" }
+
+- name: add ops_user for Alpine
+  command: adduser -D -u {{ jenkins_uid }} -G {{ jenkins_group }} -s /bin/ash  {{ jenkins_user }}

@@ -1,0 +1,21 @@
+---
+- name: add jenkins_group
+  group:
+    name: "{{ item.name }}"
+    gid: "{{ item.gid }}"
+  with_items:
+    - { name: "{{ jenkins_group }}", gid: "{{ jenkins_gid }}" }
+  when: ansible_os_family != 'Alpine'
+
+- name: add jenkins_user
+  user:
+    name: "{{ jenkins_user }}"
+    uid: "{{ jenkins_uid }}"
+    home: "{{ jenkins_home }}"
+    groups: "{{ jenkins_group }}"
+    shell: "{{ jenkins_user_shell }}"
+  when: ansible_os_family != 'Alpine'
+
+- name: add jenkins_group for Alpine
+  import_tasks: Alpine.yml
+  when: ansible_os_family == 'Alpine'

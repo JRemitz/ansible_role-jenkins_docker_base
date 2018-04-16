@@ -1,0 +1,8 @@
+---
+jenkins_user: jenkins
+jenkins_uid: 10000
+jenkins_home: /home/jenkins
+jenkins_user_shell: /usr/bin/bash
+
+jenkins_group: jenkins
+jenkins_gid: 10000
