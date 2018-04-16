@@ -19,7 +19,7 @@ script:
   - ${PWD}/tests/test.sh
 
   # Make sure scancode is accessible
-  - 'docker exec --tty ${container_id} env TERM=xterm scancode --help > /tmp/scancode.out'
+  - 'docker exec --tty ${container_id} env TERM=xterm id jenkins'
 
 
 notifications:
