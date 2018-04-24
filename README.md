@@ -3,7 +3,7 @@ ansible_role-jenkins_docker_base
 
 [![Build Status](https://travis-ci.org/JRemitz/ansible_role-jenkins_docker_base.svg?branch=master)](https://travis-ci.org/JRemitz/ansible_role-jenkins_docker_base)
 
-This role will install the minimal dependencies for customer containers used with the [kubernetes plugin](https://github.com/jenkinsci/kubernetes-plugin) for jenkins slaves.
+This role will install the minimal dependencies for customer containers used with the [kubernetes plugin](https://github.com/jenkinsci/kubernetes-plugin) for jenkins slaves. Added support for sudo permissions since the expectation is that `jenkins` user will be defaulted on the container.
 
 *Note* - when building Docker image, be sure to set `USER: jenkins` to set runtime user.
 
@@ -47,11 +47,17 @@ Jenkins group id
     jenkins_gid: 10000
 ```
 
+Jenkins user groups
+```yml
+   jenkins_groups:
+     - { name: "{{ jenkins_group }}", gid: "{{ jenkins_gid }}" }
+     - { name: sudo, gid: 10001 }
+```
 
 Dependencies
 ------------
 
-None
+Added the dependency for [Andrew Rothstein's "sudoers" role](https://galaxy.ansible.com/andrewrothstein/sudoers/) to allow jenkins user sudo access.
 
 Example Playbook
 ----------------

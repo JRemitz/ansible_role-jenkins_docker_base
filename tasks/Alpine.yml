@@ -1,8 +1,12 @@
 ---
 - name: add jenkins_group for Alpine
   command: addgroup -g {{ item.gid }} {{ item.name }}
-  with_items:
-    - { name: "{{ jenkins_group }}", gid: "{{ jenkins_gid }}" }
+  with_items: "{{ jenkins_groups }}"
 
-- name: add ops_user for Alpine
+- name: add jenkins_user for Alpine
   command: adduser -D -u {{ jenkins_uid }} -G {{ jenkins_group }} -s /bin/ash  {{ jenkins_user }}
+
+- name: add other groups for jenkins user
+  command: adduser {{ jenkins_user }} {{ item.name }}
+  with_items: "{{ jenkins_groups[1:] }}"
+  when: jenkins_groups | length > 1

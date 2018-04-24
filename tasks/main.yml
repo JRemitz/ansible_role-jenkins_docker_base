@@ -3,8 +3,7 @@
   group:
     name: "{{ item.name }}"
     gid: "{{ item.gid }}"
-  with_items:
-    - { name: "{{ jenkins_group }}", gid: "{{ jenkins_gid }}" }
+  with_items: "{{ jenkins_groups }}"
   when: ansible_os_family != 'Alpine'
 
 - name: add jenkins_user
@@ -12,7 +11,7 @@
     name: "{{ jenkins_user }}"
     uid: "{{ jenkins_uid }}"
     home: "{{ jenkins_home }}"
-    groups: "{{ jenkins_group }}"
+    groups: "{{ jenkins_groups | map(attribute='name') | list }}"
     shell: "{{ jenkins_user_shell }}"
   when: ansible_os_family != 'Alpine'
 

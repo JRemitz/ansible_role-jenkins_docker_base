@@ -6,3 +6,7 @@ jenkins_user_shell: /usr/bin/bash
 
 jenkins_group: jenkins
 jenkins_gid: 10000
+
+jenkins_groups:
+  - { name: "{{ jenkins_group }}", gid: "{{ jenkins_gid }}" }
+  - { name: sudo, gid: 10001 }

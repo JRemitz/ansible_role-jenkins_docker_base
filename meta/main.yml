@@ -48,4 +48,5 @@ galaxy_info:
   - jenkins
   - plugin
 
-dependencies: []
+dependencies: 
+  - andrewrothstein.sudoers
